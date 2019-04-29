@@ -6,14 +6,14 @@ Manuel Roldan
 DevOps Engineer, Chattigo
 mroldan@chattigo.com
 
-* Intro a Gitflow
-* Intro a Gitflow
+* Gitflow
+* Gitflow
 Gitflow es un workflow publicado y evangelizado por Vincent Driessen. Esta estrategia de trabajo define un estricto modelo de branching alrededor del release de un proyecto.
 
 Un ejemplo sencillo y familiar para la mayoria seria algo como esto. 
 .image images/gitflow_overview.png _ 600
 
-* Intro a Gitflow
+* Gitflow
 Si bien, trabajar bajo este modelo no es complicado, genera cierta continuidad en el flujo de trabajo y esto a su vez crea una nueva necesidad por pruebas automatizadas y ambientes generados de manera continua, donde realizar pruebas antes de pasar por cada una de las fases del proceso.
 
 Esto nos lleva a los inicios de la implementacion de la cultura DevOps que cuenta con un ciclo como el que se muestra a continuacion.
