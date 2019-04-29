@@ -1,0 +1,51 @@
+Gitflow & IC
+Manuel Roldan
+
+* Intro a Gitflow
+* Intro a Gitflow
+Gitflow es un workflow publicado y evangelizado por Vincent Driessen. Esta estrategia de trabajo define un estricto modelo de branching alrededor del release de un proyecto.
+
+Un ejemplo sencillo y familiar para la mayoria seria algo como esto. 
+.image images/gitflow_overview.png _ 600
+
+* Intro a Gitflow
+Si bien, trabajar bajo este modelo no es complicado, genera cierta continuidad en el flujo de trabajo y esto a su vez crea una nueva necesidad por pruebas automatizadas y ambientes generados de manera continua, donde realizar pruebas antes de pasar por cada una de las fases del proceso.
+
+Esto nos lleva a los inicios de la implementacion de la cultura DevOps que cuenta con un ciclo como el que se muestra a continuacion.
+.image images/devopsloop.png _ 500
+
+* Integrando herramientas con Gitflow
+
+* Integrando herramientas con Gitflow
+Como mencionabamos anteriormente, este flujo de trabajo continuo genera una necesidad de pruebas y ambientes de manera continua por lo que recurrimos al uso de herramientas que nos proporcionan cierto grado de facilidad en habilitar lo requerido, tales como:
+- Docker
+- Jenkins o alguna otra herramienta para IC/DC
+.image images/dockerjenkins.png _ 400
+
+* Integrando herramientas con Gitflow
+Para la implementacion de Docker tambien necesitamos manejar la misma estrategia del lado de las automatizaciones, es decir, crearemos imagenes y desplegaremos solo partiendo de ramas especificas y algunas tienen sus particularidades.
+
+- Develop: Se aplican pruebas funcionales y se despliega a un ambiente de desarrollo.
+- Feature: Se aplica todo el suite de pruebas (unitarias, integracion y funcionales), se crea imagen Docker pero no se realiza despliegue.
+- Release/Hotfix: Se aplican todo el suite de pruebas, se genera imagen Docker y se realiza despliegue a ambiente de QA.
+- Master: Es la rama donde una vez de donde se procede a desplegar a produccion, una vez recorrido el flujo descrito anteriormente.
+
+* Integrando herramientas con Gitflow
+
+- Como encajan las herramientas de IC/DC?
+Puesto que requerimos automatizacion de todos los procesos antes mencionados, necesitamos herramientas desarrolladas con este objetivo en mente y es donde entran las herramientas de IC/DC. En nuestro caso utilizaremos Jenkins, por lo que dare una breve descripcion de la herramienta.
+
+Jenkins es el servidor de automatizacion mas popular, se trata de una aplicacion Java autocontenida que facilita el scripting de varios flujos de trabajos y cuenta con una gran cantidad de plugins a su disposicion por lo que la integracion con motores de notificacion, servidores de correo, creacion de esclavos y diferentes herramientas de build y SCM es bastante sencilla.
+.image images/strong_jenkins.jpg _ 250
+
+* Nexus Repository
+
+Utilizamos el repositorio Nexus como registro de nuestras imagenes Docker. Este registro se encarga de disponibilizar las imagenes Docker creadas durante el proceso de automatizacion tanto como las creadas manualmente. Para poder descargar las imagenes generadas por los procesos de IC (Actualmente se encuentran manuales, pero estoy trabajando en la automatizacion pls.), solo tienen que ejecutar un comando con las credenciales que procederemos a generar luego de esta charla.
+    docker login -u <usuario generado> -p nexus.chattigo.com:49443
+El uso del puerto es requerido debido a que la API del registro se encuentra expuesta en dicho puerto con TLS.
+
+* FIN
+
+Eso seria todo, espero que no se haya hecho demasiado larga o aburrida la presentacion. Lo ideal es que todos estemos en la misma pagina y transparentemos el trabajo de manera que podamos reducir sorpresas al minimo. Parte de la cultura DevOps es la comunicacion continua y que todos podamos interactuar con estos procesos sin problemas, por lo que debemos trabajar en la mejora continua sobre todo con aquellas personas que todavia no hayan trabajado con estos temas.
+
+Les agradezco a todos por su paciencia y atencion.
